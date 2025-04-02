@@ -8,6 +8,10 @@ const userSchema=mongoose.Schema({
     age: Number,
     email: String,
     password: String,
+    profilepicture:{
+        type:String,
+        default:"pfp.webp"
+    },
     posts:[
         {
             type:mongoose.Schema.Types.ObjectId,

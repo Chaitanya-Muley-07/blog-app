@@ -16,32 +16,16 @@
         <div class="w-full flex justify-end">
             <a class="bg-red-500 rounded-md px-3 py-2 text-sm mb-5 inline-block" href="/logout">Logout</a>
         </div>
-        <div class="flex items-start gap-3">
-            <div class="w-10 m-1 h-10  rounded-md overflow-hidden">
-                <img class="w-full h-full object-cover" src="./images/uploads/<%= user.profilepicture %>" alt="">
-            </div>
 
-            <h3 class="text-4xl"><span class="font-light">Hello,</span>
-                <%= user.name %> !!👋🏻
-            </h3>
-
-        </div>
-        
-        <h5 class="mb-5 mt-3">You can create a new post.</h5>
-        <form action="/post" method="post">
-            <textarea placeholder="what's on your mind?" class="block outline-none w-1/3 p-3 resize-none 
-                bg-transparent border-2 border-zinc-800 rounded-md" name="content"></textarea>
-            <input class="px-3 text-sm w-40 py-2 bg-blue-500 block rounded-md mt-2 " type="submit"
-                value="Create New Post">
-        </form>
+      
         <div class="posts w-full mt-20 ">
-            <h3 class="text-white font- tracking-tight">Your Posts</h3>
+            <h3 class="text-white font- tracking-tight">All Posts</h3>
             <div class="postcontainer">
 
-                <% user.posts.reverse().forEach((post)=>{ %>
+                <% posts.reverse().forEach((post)=>{ %>
                     <div class="post mt-2 mb-4 w-1/3 p-4 border-2 border-zinc-800 bg-zinc-800 rounded-md">
                         <h4 class="text-blue-500 mb-2">
-                            <%= user.username %>
+                            <%= post.user.username %>
                         </h4>
                         <p class="text-sm tracking-tight">
                             <%= post.content %>
@@ -49,9 +33,10 @@
                         <small class="text-xs mt-4 inline-block">
                             <%= post.likes.length %> likes
                         </small>
+                        
                         <div class="btns flex mt-1 gap-4">
                             <a class="text-blue-500 " href="/like/<%= post._id %>">
-                                <% if (post.likes.indexOf(user._id) === -1) { %> 
+                                <% if (post.likes.indexOf(post.user._id) === -1) { %> 
                                   Like
                                 <% } else { %> 
                                   Unlike
@@ -60,9 +45,11 @@
                               
                             <a class="text-zinc-600 " href="/edit/<%= post._id %>">Edit</a>
                         </div>
+    
+
                     </div>
                     <%}) %>
-
+                   
 
 
             </div>
